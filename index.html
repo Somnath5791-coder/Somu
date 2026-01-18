@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOGUE | Premium Clothing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --accent-color: #ff3f6c;
+            --bg-gray: #f5f5f5;
+            --text-gray: #666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 400px;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            margin-bottom: 40px;
+        }
+
+        /* --- Product Grid --- */
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .product-card {
+            background: white;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            background-color: var(--bg-gray);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #aaa;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px 5px;
+        }
+
+        .brand-name {
+            font-size: 12px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 5px 0;
+        }
+
+        .price-tag {
+            font-size: 18px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        /* --- Variety Selectors --- */
+        .variety-section {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .size-btn {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            background: none;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .size-btn:hover, .size-btn.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .buy-btn:hover {
+            background: #333;
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 50px;
+            padding: 40px;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">VOGUE</div>
+        <ul class="nav-links">
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">Sale</a></li>
+        </ul>
+        <div class="nav-icons">
+            <span>🛒 Cart</span>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>SPRING COLLECTION 2026</h1>
+        <p>Elevate your everyday style with our latest drop.</p>
+    </header>
+
+    <div class="container">
+        <h2>Featured Products</h2>
+        <div class="product-grid" id="product-container">
+            </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 VOGUE Clothing Co. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Sample Product Data
+        const products = [
+            {
+                id: 1,
+                name: "Classic Cotton White Tee",
+                brand: "Vogue Basics",
+                price: 29.99,
+                oldPrice: 39.99,
+                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500",
+                sizes: ["S", "M", "L", "XL"]
+            },
+            {
+                id: 2,
+                name: "Slim Fit Denim Jacket",
+                brand: "Vogue Denim",
+                price: 89.00,
+                oldPrice: 120.00,
+                image: "https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=500",
+                sizes: ["M", "L", "XL"]
+            },
+            {
+                id: 3,
+                name: "Urban Cargo Pants",
+                brand: "Vogue Street",
+                price: 55.00,
+                oldPrice: 75.00,
+                image: "https://images.unsplash.com/photo-1517438476312-10d79c67750d?w=500",
+                sizes: ["30", "32", "34", "36"]
+            },
+            {
+                id: 4,
+                name: "Linen Summer Shirt",
+                brand: "Vogue Summer",
+                price: 45.00,
+                oldPrice: 55.00,
+                image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500",
+                sizes: ["S", "M", "L"]
+            }
+        ];
+
+        const container = document.getElementById('product-container');
+
+        // Function to render products
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            
+            card.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="product-info">
+                    <p class="brand-name">${product.brand}</p>
+                    <h3 class="product-title">${product.name}</h3>
+                    <div>
+                        <span class="price-tag">$${product.price}</span>
+                        <span class="original-price">$${product.oldPrice}</span>
+                    </div>
+                    <div class="variety-section">
+                        ${product.sizes.map(size => `<button class="size-btn">${size}</button>`).join('')}
+                    </div>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>
