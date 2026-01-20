@@ -3,287 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOGUE | Premium Clothing</title>
+    <title>VOGUE | Multi-Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #1a1a1a;
-            --accent-color: #ff3f6c;
-            --bg-gray: #f5f5f5;
-            --text-gray: #666;
+            --primary-color: #2874f0; /* Amazon/Flipkart Blue */
+            --accent-color: #fb641b; /* Action Orange */
+            --bg-gray: #f1f3f6;
+            --text-main: #212121;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: white;
-            color: var(--primary-color);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-gray); color: var(--text-main); }
 
         /* --- Navigation --- */
         nav {
+            background: var(--primary-color);
+            padding: 15px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            border-bottom: 1px solid #eee;
+            color: white;
             position: sticky;
             top: 0;
-            background: white;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 2px;
-        }
+        .logo { font-size: 24px; font-weight: 800; cursor: pointer; }
+        
+        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links li { cursor: pointer; font-weight: 500; transition: 0.3s; opacity: 0.9; }
+        .nav-links li:hover { opacity: 1; text-decoration: underline; }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-        }
+        .cart-icon { cursor: pointer; position: relative; font-weight: 600; }
+        #cart-count { background: var(--accent-color); color: white; border-radius: 50%; padding: 2px 7px; font-size: 12px; margin-left: 5px; }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 500;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            height: 400px;
-            background: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* --- Category Header --- */
+        .category-banner {
+            background: white;
+            padding: 15px;
             text-align: center;
-            flex-direction: column;
-            margin-bottom: 40px;
+            border-bottom: 1px solid #ddd;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
         /* --- Product Grid --- */
-        .container {
-            width: 90%;
-            margin: 0 auto;
-        }
-
+        .container { width: 90%; margin: 20px auto; display: flex; gap: 20px; }
+        
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 20px 0;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            width: 100%;
         }
 
         .product-card {
             background: white;
-            transition: transform 0.3s;
-            cursor: pointer;
+            padding: 15px;
+            border-radius: 4px;
+            transition: box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
+        .product-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
 
         .product-image {
             width: 100%;
-            height: 350px;
-            background-color: var(--bg-gray);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: #aaa;
-            overflow: hidden;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 10px;
         }
 
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .product-title { font-size: 15px; margin-bottom: 8px; height: 40px; overflow: hidden; }
+        .price-row { margin: 10px 0; }
+        .price { font-size: 18px; font-weight: 600; }
+        .old-price { color: #878787; text-decoration: line-through; font-size: 14px; margin-left: 8px; }
 
-        .product-info {
-            padding: 15px 5px;
-        }
-
-        .brand-name {
-            font-size: 12px;
-            color: var(--text-gray);
-            text-transform: uppercase;
-        }
-
-        .product-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 5px 0;
-        }
-
-        .price-tag {
-            font-size: 18px;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: var(--text-gray);
-            font-size: 14px;
-            margin-left: 10px;
-        }
-
-        /* --- Variety Selectors --- */
-        .variety-section {
-            margin-top: 10px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .size-btn {
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            background: none;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .size-btn:hover, .size-btn.active {
-            border-color: var(--primary-color);
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .buy-btn {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            background: var(--primary-color);
-            color: white;
+        .btn-group { display: flex; gap: 10px; margin-top: 10px; }
+        .add-btn, .buy-btn {
+            flex: 1;
+            padding: 10px 5px;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
+            border-radius: 2px;
+            font-size: 12px;
         }
 
-        .buy-btn:hover {
-            background: #333;
+        .add-btn { background: #ff9f00; color: white; }
+        .buy-btn { background: var(--accent-color); color: white; }
+
+        /* --- Checkout Modal --- */
+        #checkout-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+            z-index: 2000;
+            width: 400px;
+            border-radius: 8px;
         }
 
-        /* --- Footer --- */
-        footer {
-            margin-top: 50px;
-            padding: 40px;
-            background: var(--primary-color);
-            color: white;
-            text-align: center;
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">VOGUE</div>
+        <div class="logo" onclick="filterProducts('all')">VOGUE STORE</div>
         <ul class="nav-links">
-            <li><a href="#">Men</a></li>
-            <li><a href="#">Women</a></li>
-            <li><a href="#">New Arrivals</a></li>
-            <li><a href="#">Sale</a></li>
+            <li onclick="filterProducts('men')">Men's Wear</li>
+            <li onclick="filterProducts('women')">Women's Wear</li>
+            <li onclick="filterProducts('shoes')">Shoes</li>
+            <li onclick="filterProducts('phones')">Phones</li>
         </ul>
-        <div class="nav-icons">
-            <span>🛒 Cart</span>
+        <div class="cart-icon" onclick="showCheckout()">
+            🛒 My Cart <span id="cart-count">0</span>
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>SPRING COLLECTION 2026</h1>
-        <p>Elevate your everyday style with our latest drop.</p>
-    </header>
+    <div class="category-banner" id="current-cat">Featured Collection</div>
 
     <div class="container">
-        <h2>Featured Products</h2>
-        <div class="product-grid" id="product-container">
+        <div class="product-grid" id="product-list">
             </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 VOGUE Clothing Co. All rights reserved.</p>
-    </footer>
+    <div class="modal-overlay" id="overlay" onclick="closeModal()"></div>
+    <div id="checkout-modal">
+        <h3>Order Summary</h3>
+        <hr><br>
+        <div id="cart-items-list"></div>
+        <br>
+        <h4 id="total-price">Total: $0</h4>
+        <br>
+        <button class="buy-btn" style="width: 100%; padding: 15px;" onclick="alert('Order Placed Successfully!')">Confirm Purchase</button>
+    </div>
 
     <script>
-        // Sample Product Data
         const products = [
-            {
-                id: 1,
-                name: "Classic Cotton White Tee",
-                brand: "Vogue Basics",
-                price: 29.99,
-                oldPrice: 39.99,
-                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500",
-                sizes: ["S", "M", "L", "XL"]
-            },
-            {
-                id: 2,
-                name: "Slim Fit Denim Jacket",
-                brand: "Vogue Denim",
-                price: 89.00,
-                oldPrice: 120.00,
-                image: "https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=500",
-                sizes: ["M", "L", "XL"]
-            },
-            {
-                id: 3,
-                name: "Urban Cargo Pants",
-                brand: "Vogue Street",
-                price: 55.00,
-                oldPrice: 75.00,
-                image: "https://images.unsplash.com/photo-1517438476312-10d79c67750d?w=500",
-                sizes: ["30", "32", "34", "36"]
-            },
-            {
-                id: 4,
-                name: "Linen Summer Shirt",
-                brand: "Vogue Summer",
-                price: 45.00,
-                oldPrice: 55.00,
-                image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500",
-                sizes: ["S", "M", "L"]
-            }
+            { id: 1, cat: 'men', name: "Men's Slim Fit Shirt", price: 25, old: 40, img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400" },
+            { id: 2, cat: 'women', name: "Elegant Summer Dress", price: 45, old: 60, img: "https://images.unsplash.com/photo-1572804013307-5977c14a4a0a?w=400" },
+            { id: 3, cat: 'shoes', name: "Running Sports Shoes", price: 80, old: 120, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" },
+            { id: 4, cat: 'phones', name: "iPhone 15 Pro Max Clone", price: 999, old: 1100, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400" },
+            { id: 5, cat: 'men', name: "Classic Blue Jeans", price: 35, old: 50, img: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400" },
+            { id: 6, cat: 'shoes', name: "Leather Formal Shoes", price: 65, old: 90, img: "https://images.unsplash.com/photo-1449247709967-d4461a6a6103?w=400" },
+            { id: 7, cat: 'phones', name: "Android Flagship Z", price: 699, old: 750, img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400" },
+            { id: 8, cat: 'women', name: "Casual Designer Top", price: 20, old: 35, img: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400" }
         ];
 
-        const container = document.getElementById('product-container');
+        let cart = [];
 
-        // Function to render products
-        products.forEach(product => {
-            const card = document.createElement('div');
-            card.className = 'product-card';
+        function renderProducts(filter = 'all') {
+            const list = document.getElementById('product-list');
+            list.innerHTML = "";
             
-            card.innerHTML = `
-                <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}">
-                </div>
-                <div class="product-info">
-                    <p class="brand-name">${product.brand}</p>
-                    <h3 class="product-title">${product.name}</h3>
-                    <div>
-                        <span class="price-tag">$${product.price}</span>
-                        <span class="original-price">$${product.oldPrice}</span>
+            const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+            
+            filtered.forEach(p => {
+                list.innerHTML += `
+                    <div class="product-card">
+                        <img src="${p.img}" class="product-image">
+                        <div>
+                            <h3 class="product-title">${p.name}</h3>
+                            <div class="price-row">
+                                <span class="price">$${p.price}</span>
+                                <span class="old-price">$${p.old}</span>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+                            <button class="buy-btn" onclick="buyNow(${p.id})">Buy Now</button>
+                        </div>
                     </div>
-                    <div class="variety-section">
-                        ${product.sizes.map(size => `<button class="size-btn">${size}</button>`).join('')}
-                    </div>
-                    <button class="buy-btn">Add to Cart</button>
-                </div>
-            `;
-            container.appendChild(card);
-        });
+                `;
+            });
+            document.getElementById('current-cat').innerText = filter + " Store";
+        }
+
+        function filterProducts(cat) {
+            renderProducts(cat);
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            document.getElementById('cart-count').innerText = cart.length;
+            alert(product.name + " added to cart!");
+        }
+
+        function buyNow(id) {
+            cart = []; // Reset cart for direct buy
+            addToCart(id);
+            showCheckout();
+        }
+
+        function showCheckout() {
+            if(cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            const list = document.getElementById('cart-items-list');
+            let total = 0;
+            list.innerHTML = "";
+            cart.forEach(item => {
+                list.innerHTML += `<p>✅ ${item.name} - <b>$${item.price}</b></p>`;
+                total += item.price;
+            });
+            document.getElementById('total-price').innerText = "Total Payable: $" + total;
+            document.getElementById('checkout-modal').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('checkout-modal').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Initial Load
+        renderProducts('all');
     </script>
 </body>
 </html>
-
